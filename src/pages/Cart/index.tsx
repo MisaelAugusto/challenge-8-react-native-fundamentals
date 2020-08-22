@@ -20,7 +20,7 @@ import {
   ActionButton,
   TotalProductsContainer,
   TotalProductsText,
-  SubtotalValue,
+  SubtotalValue
 } from './styles';
 
 import { useCart } from '../../hooks/cart';
@@ -39,23 +39,29 @@ const Cart: React.FC = () => {
   const { increment, decrement, products } = useCart();
 
   function handleIncrement(id: string): void {
-    // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
-    // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const totalPrice = products.reduce(
+      (result, product) => result + product.price * product.quantity,
+      0
+    );
 
-    return formatValue(0);
+    return formatValue(totalPrice);
   }, [products]);
 
   const totalItensInCart = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const totalItems = products.reduce(
+      (result, product) => result + product.quantity,
+      0
+    );
 
-    return 0;
+    return totalItems;
   }, [products]);
 
   return (
@@ -63,12 +69,12 @@ const Cart: React.FC = () => {
       <ProductContainer>
         <ProductList
           data={products}
-          keyExtractor={item => item.id}
+          keyExtractor={(item: any) => item.id}
           ListFooterComponent={<View />}
           ListFooterComponentStyle={{
-            height: 80,
+            height: 80
           }}
-          renderItem={({ item }: { item: Product }) => (
+          renderItem={({ item }: any) => (
             <Product>
               <ProductImage source={{ uri: item.image_url }} />
               <ProductTitleContainer>

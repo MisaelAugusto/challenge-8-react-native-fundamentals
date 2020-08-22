@@ -21,9 +21,9 @@ export const ProductContainer = styled.View`
 `;
 
 export const ProductList = styled(
-  FlatList as new () => FlatList<Product>,
+  FlatList as new () => FlatList<Product>
 ).attrs({
-  numColumns: 2,
+  numColumns: 2
 })`
   flex: 1;
   padding: 0 10px;
